@@ -12,9 +12,15 @@
       }
 }
 
+let white = [' ' '\t']+
+let newline = '\r' | '\n' | "\r\n"
+
 rule read =
   parse
+  | white    { read lexbuf }
+  | newline  { next_line lexbuf; read lexbuf }
   | "move" { MOVE }
   | "walk" { WALK }
   | "listen" { LISTEN }
   | "shoot" { SHOOT }
+  | eof { EOF }

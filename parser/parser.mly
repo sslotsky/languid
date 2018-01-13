@@ -3,12 +3,20 @@
 %}
 
 %token WALK LISTEN MOVE SHOOT
+%token EOF
 
-%start <Ast.command> prog
+%start <Ast.command list> prog
 %%
 
 prog:
-  | WALK { Now(Walk) }
-  | LISTEN { Now(Listen) }
-  | MOVE { Turn(Move) }
-  | SHOOT { Turn(Shoot) };
+| cmds = commands EOF { cmds }
+
+commands:
+| cmd = command { [cmd] }
+| cmd = command rest = commands { cmd :: rest }
+
+command:
+| WALK { Now(Walk) }
+| LISTEN { Now(Listen) }
+| MOVE { Turn(Move) }
+| SHOOT { Turn(Shoot) };
