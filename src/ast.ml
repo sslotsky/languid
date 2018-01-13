@@ -1,11 +1,17 @@
+type direction =
+  | Up
+  | Down
+  | Left
+  | Right
+
 type instant =
-  | Walk
+  | Walk of direction
   | Listen
 
-type turn_based =
-  | Move
-  | Shoot
+and turn_based =
+  | Move of direction
+  | Shoot of direction
 
-type command =
+and command =
   | Now of instant
   | Turn of turn_based

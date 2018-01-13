@@ -6,22 +6,22 @@ var Lexing         = require("bs-platform/lib/js/lexing.js");
 var Lexer$Languid  = require("./lexer.bs.js");
 var Parser$Languid = require("./parser.bs.js");
 
-var lexbuf = Lexing.from_string("walk shoot");
+var lexbuf = Lexing.from_string("walk up shoot right");
 
 var commands = Parser$Languid.prog(Lexer$Languid.read, lexbuf);
 
 List.iter((function (command) {
         if (command.tag) {
-          if (command[0] !== 0) {
+          if (command[0].tag) {
             console.log("shoot");
             return /* () */0;
           } else {
             return /* () */0;
           }
-        } else if (command[0] !== 0) {
+        } else if (command[0]) {
+          console.log("walk");
           return /* () */0;
         } else {
-          console.log("walk");
           return /* () */0;
         }
       }), commands);

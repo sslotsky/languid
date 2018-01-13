@@ -23,4 +23,8 @@ rule read =
   | "walk" { WALK }
   | "listen" { LISTEN }
   | "shoot" { SHOOT }
+  | "up" { UP }
+  | "down" { DOWN }
+  | "left" { LEFT }
+  | "right" { RIGHT }
   | eof { EOF }

@@ -8,7 +8,7 @@ describe("Parser", () => {
   open Ast;
 
   describe("basic script", () => {
-    let lexbuf = from_string("walk shoot");
+    let lexbuf = from_string("walk up shoot right");
     let commands = prog(read)(lexbuf);
 
     test("returns the expected number of commands", () => {
@@ -16,11 +16,11 @@ describe("Parser", () => {
     });
 
     test("returns the first command first", () => {
-      expect(List.nth(commands, 0)) |> toEqual(Now(Walk));
+      expect(List.nth(commands, 0)) |> toEqual(Now(Walk(Up)));
     });
 
     test("returns the last command last", () => {
-      expect(List.nth(commands, 1)) |> toEqual(Turn(Shoot));
+      expect(List.nth(commands, 1)) |> toEqual(Turn(Shoot(Right)));
     });
   });
 });
