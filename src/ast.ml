@@ -6,7 +6,7 @@ type direction =
 
 type instant =
   | Walk of direction
-  | Listen
+  | Listen of string
 
 and turn_based =
   | Move of direction

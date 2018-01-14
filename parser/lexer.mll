@@ -12,6 +12,7 @@
       }
 }
 
+let quotedString = '\'' [^ '\'']* '\''
 let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
 
@@ -27,4 +28,5 @@ rule read =
   | "down" { DOWN }
   | "left" { LEFT }
   | "right" { RIGHT }
+	| quotedString { STRING (let s = lexeme lexbuf in String.sub(s)(1)(String.length(s) - 2)) }
   | eof { EOF }

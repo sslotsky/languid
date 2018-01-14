@@ -2,6 +2,7 @@
   open Ast
 %}
 
+%token <string> STRING
 %token UP DOWN LEFT RIGHT
 %token WALK LISTEN MOVE SHOOT
 %token EOF
@@ -18,7 +19,7 @@ commands:
 
 command:
 | WALK d = direction { Now(Walk(d)) }
-| LISTEN { Now(Listen) }
+| LISTEN s = STRING { Now(Listen(s)) }
 | MOVE d = direction { Turn(Move(d)) }
 | SHOOT d = direction { Turn(Shoot(d)) };
 

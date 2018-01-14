@@ -18,10 +18,10 @@ List.iter((function (command) {
           } else {
             return /* () */0;
           }
-        } else if (command[0]) {
-          console.log("walk");
+        } else if (command[0].tag) {
           return /* () */0;
         } else {
+          console.log("walk");
           return /* () */0;
         }
       }), commands);
