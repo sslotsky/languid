@@ -10,24 +10,29 @@ describe("Parser", () => {
   let script = "
     walk up
     shoot right
-    listen 'mock'
+    listen 'mock' do
+      shoot left
+    end
   ";
 
   describe("basic script", () => {
     let lexbuf = from_string(script);
     let commands = prog(read)(lexbuf);
 
-    test("returns the expected number of commands", () => {
+    test("parses all commands", () => {
       expect(List.length(commands)) |> toBe(3);
     });
 
-    test("returns the first command first", () => {
+    test("parses the walk command", () => {
       expect(List.nth(commands, 0)) |> toEqual(Now(Walk(Up)));
     });
 
-    test("returns the last command last", () => {
+    test("parses the shoot command", () => {
       expect(List.nth(commands, 1)) |> toEqual(Turn(Shoot(Right)));
-      expect(List.nth(commands, 2)) |> toEqual(Now(Listen("mock")));
+    });
+
+    test("parses the listen command", () => {
+      expect(List.nth(commands, 2)) |> toEqual(Now(Listen("mock", [Turn(Shoot(Left))])));
     });
   });
 });

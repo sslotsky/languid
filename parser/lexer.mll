@@ -28,5 +28,7 @@ rule read =
   | "down" { DOWN }
   | "left" { LEFT }
   | "right" { RIGHT }
+  | "do" { DO }
+  | "end" { END }
 	| quotedString { STRING (let s = lexeme lexbuf in String.sub(s)(1)(String.length(s) - 2)) }
   | eof { EOF }

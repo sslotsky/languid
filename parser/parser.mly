@@ -5,6 +5,7 @@
 %token <string> STRING
 %token UP DOWN LEFT RIGHT
 %token WALK LISTEN MOVE SHOOT
+%token DO END
 %token EOF
 
 %start <Ast.command list> prog
@@ -19,7 +20,7 @@ commands:
 
 command:
 | WALK d = direction { Now(Walk(d)) }
-| LISTEN s = STRING { Now(Listen(s)) }
+| LISTEN s = STRING DO cmds = commands END { Now(Listen(s, cmds)) }
 | MOVE d = direction { Turn(Move(d)) }
 | SHOOT d = direction { Turn(Shoot(d)) };
 

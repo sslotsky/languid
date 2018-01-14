@@ -10,17 +10,25 @@ var Parser$Languid = require("../src/parser.bs.js");
 
 describe("Parser", (function () {
         describe("basic script", (function () {
-                var lexbuf = Lexing.from_string("\n    walk up\n    shoot right\n    listen 'mock'\n  ");
+                var lexbuf = Lexing.from_string("\n    walk up\n    shoot right\n    listen 'mock' do\n      shoot left\n    end\n  ");
                 var commands = Parser$Languid.prog(Lexer$Languid.read, lexbuf);
-                Jest.test("returns the expected number of commands", (function () {
+                Jest.test("parses all commands", (function () {
                         return Jest.Expect[/* toBe */2](3, Jest.Expect[/* expect */0](List.length(commands)));
                       }));
-                Jest.test("returns the first command first", (function () {
+                Jest.test("parses the walk command", (function () {
                         return Jest.Expect[/* toEqual */12](/* Now */Block.__(0, [/* Walk */Block.__(0, [/* Up */0])]), Jest.Expect[/* expect */0](List.nth(commands, 0)));
                       }));
-                return Jest.test("returns the last command last", (function () {
-                              Jest.Expect[/* toEqual */12](/* Turn */Block.__(1, [/* Shoot */Block.__(1, [/* Right */3])]), Jest.Expect[/* expect */0](List.nth(commands, 1)));
-                              return Jest.Expect[/* toEqual */12](/* Now */Block.__(0, [/* Listen */Block.__(1, ["mock"])]), Jest.Expect[/* expect */0](List.nth(commands, 2)));
+                Jest.test("parses the shoot command", (function () {
+                        return Jest.Expect[/* toEqual */12](/* Turn */Block.__(1, [/* Shoot */Block.__(1, [/* Right */3])]), Jest.Expect[/* expect */0](List.nth(commands, 1)));
+                      }));
+                return Jest.test("parses the listen command", (function () {
+                              return Jest.Expect[/* toEqual */12](/* Now */Block.__(0, [/* Listen */Block.__(1, [
+                                                "mock",
+                                                /* :: */[
+                                                  /* Turn */Block.__(1, [/* Shoot */Block.__(1, [/* Left */2])]),
+                                                  /* [] */0
+                                                ]
+                                              ])]), Jest.Expect[/* expect */0](List.nth(commands, 2)));
                             }));
               }));
         return /* () */0;
