@@ -12,6 +12,9 @@
       }
 }
 
+let char = ['a'-'z' 'A'-'Z']
+let digit = ['0'-'9']
+let identifier  = char(char|digit|['-' '_' '.'])*
 let quotedString = '\'' [^ '\'']* '\''
 let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
@@ -30,5 +33,7 @@ rule read =
   | "right" { RIGHT }
   | "do" { DO }
   | "end" { END }
+  | "send" { SEND }
+  | identifier { ID(lexeme lexbuf) }
 	| quotedString { STRING (let s = lexeme lexbuf in String.sub(s)(1)(String.length(s) - 2)) }
   | eof { EOF }

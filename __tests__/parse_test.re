@@ -13,6 +13,8 @@ describe("Parser", () => {
     listen 'mock' do
       shoot left
     end
+
+    send judy 'my notice'
   ";
 
   describe("basic script", () => {
@@ -20,7 +22,7 @@ describe("Parser", () => {
     let commands = prog(read)(lexbuf);
 
     test("parses all commands", () => {
-      expect(List.length(commands)) |> toBe(3);
+      expect(List.length(commands)) |> toBe(4);
     });
 
     test("parses the walk command", () => {
@@ -34,5 +36,9 @@ describe("Parser", () => {
     test("parses the listen command", () => {
       expect(List.nth(commands, 2)) |> toEqual(Now(Listen("mock", [Turn(Shoot(Left))])));
     });
+
+    test("parses the send command", () => {
+      expect(List.nth(commands, 3)) |> toEqual(Now(Send("judy", "my notice")));
+    })
   });
 });

@@ -7,6 +7,7 @@ type direction =
 type instant =
   | Walk of direction
   | Listen of string * command list
+  | Send of string * string
 
 and turn_based =
   | Move of direction

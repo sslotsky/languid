@@ -2,9 +2,10 @@
   open Ast
 %}
 
+%token <string> ID
 %token <string> STRING
 %token UP DOWN LEFT RIGHT
-%token WALK LISTEN MOVE SHOOT
+%token WALK LISTEN SEND MOVE SHOOT
 %token DO END
 %token EOF
 
@@ -21,6 +22,7 @@ commands:
 command:
 | WALK d = direction { Now(Walk(d)) }
 | LISTEN s = STRING DO cmds = commands END { Now(Listen(s, cmds)) }
+| SEND id = ID msg = STRING { Now(Send(id, msg)) }
 | MOVE d = direction { Turn(Move(d)) }
 | SHOOT d = direction { Turn(Shoot(d)) };
 
