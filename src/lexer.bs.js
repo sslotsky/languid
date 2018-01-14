@@ -7,7 +7,7 @@ var Lexing          = require("bs-platform/lib/js/lexing.js");
 var $$String        = require("bs-platform/lib/js/string.js");
 var Caml_exceptions = require("bs-platform/lib/js/caml_exceptions.js");
 
-var $$SyntaxError = Caml_exceptions.create("Lexer-Languid.SyntaxError");
+var $$SyntaxError = Caml_exceptions.create("Lexer-Slangwidge.SyntaxError");
 
 function next_line(lexbuf) {
   var pos = lexbuf[/* lex_curr_p */11];

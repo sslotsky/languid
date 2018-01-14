@@ -8,7 +8,7 @@ var Pervasives              = require("bs-platform/lib/js/pervasives.js");
 var Caml_exceptions         = require("bs-platform/lib/js/caml_exceptions.js");
 var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 
-var $$Error = Caml_exceptions.create("Parser-Languid.Basics.Error");
+var $$Error = Caml_exceptions.create("Parser-Slangwidge.Basics.Error");
 
 var Basics = /* module */[/* Error */$$Error];
 

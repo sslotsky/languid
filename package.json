@@ -1,5 +1,5 @@
 {
-  "name": "languid",
+  "name": "slangwidge",
   "version": "0.1.0",
   "scripts": {
     "copy-parser": "cp parser/_build/*.ml src",
@@ -7,7 +7,8 @@
     "prepare": "yarn run build-parser && yarn run copy-parser",
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
-    "clean": "bsb -clean-world"
+    "clean": "bsb -clean-world",
+    "test": "jest"
   },
   "keywords": [
     "BuckleScript"
