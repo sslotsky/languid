@@ -1,6 +1,6 @@
 {
   "name": "slangwidge",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "scripts": {
     "copy-parser": "cp parser/_build/*.ml src",
     "build-parser": "(cd parser && corebuild -use-menhir parser.ml lexer.ml)",
