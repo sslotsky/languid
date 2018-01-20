@@ -27,13 +27,13 @@ rule read =
   | "walk" { WALK }
   | "listen" { LISTEN }
   | "shoot" { SHOOT }
+  | "do" { DO }
+  | "end" { END }
+  | "send" { SEND }
   | "up" { UP }
   | "down" { DOWN }
   | "left" { LEFT }
   | "right" { RIGHT }
-  | "do" { DO }
-  | "end" { END }
-  | "send" { SEND }
   | identifier { ID(lexeme lexbuf) }
 	| quotedString { STRING (let s = lexeme lexbuf in String.sub(s)(1)(String.length(s) - 2)) }
   | _ { raise (SyntaxError ("Unexpected char: " ^ lexeme lexbuf)) }

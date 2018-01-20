@@ -90,10 +90,7 @@ and _menhir_goto_commands : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.co
             let (_menhir_stack, _menhir_s, (cmds : (Ast.command list))) = _menhir_stack in
             let _2 = () in
             let _v : (Ast.command list) =                       ( cmds ) in
-            let _menhir_stack = Obj.magic _menhir_stack in
-            let _menhir_stack = Obj.magic _menhir_stack in
-            let (_1 : (Ast.command list)) = _v in
-            Obj.magic _1
+            _menhir_goto_prog _menhir_env _menhir_stack _menhir_s _v
         | _ ->
             assert (not _menhir_env._menhir_error);
             _menhir_env._menhir_error <- true;
@@ -354,6 +351,13 @@ and _menhir_run14 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
         let (_menhir_stack, _menhir_s) = _menhir_stack in
         _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) _menhir_s
 
+and _menhir_goto_prog : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.command list) -> 'ttv_return =
+  fun _menhir_env _menhir_stack _menhir_s _v ->
+    let _menhir_stack = Obj.magic _menhir_stack in
+    let _menhir_stack = Obj.magic _menhir_stack in
+    let (_1 : (Ast.command list)) = _v in
+    Obj.magic _1
+
 and _menhir_discard : _menhir_env -> _menhir_env =
   fun _menhir_env ->
     let lexer = _menhir_env._menhir_lexer in
@@ -379,6 +383,13 @@ and prog : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.command list) =
     let _menhir_env = _menhir_discard _menhir_env in
     let _tok = _menhir_env._menhir_token in
     match _tok with
+    | EOF ->
+        let _menhir_stack = Obj.magic _menhir_stack in
+        let _menhir_s = MenhirState0 in
+        let _menhir_stack = Obj.magic _menhir_stack in
+        let _1 = () in
+        let _v : (Ast.command list) =       ( [] ) in
+        _menhir_goto_prog _menhir_env _menhir_stack _menhir_s _v
     | LISTEN ->
         _menhir_run14 _menhir_env (Obj.magic _menhir_stack) MenhirState0
     | MOVE ->

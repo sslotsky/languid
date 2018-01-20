@@ -17,6 +17,15 @@ describe("Parser", () => {
     send judy 'my notice'
   ";
 
+  describe("blank script", () => {
+    let lexbuf = from_string("");
+    let commands = prog(read)(lexbuf);
+
+    it("returns an empty list", () => {
+      expect(List.length(commands)) |> toBe(0);
+    });
+  });
+
   describe("basic script", () => {
     let lexbuf = from_string(script);
     let commands = prog(read)(lexbuf);

@@ -13,6 +13,7 @@
 %%
 
 prog:
+| EOF { [] }
 | cmds = commands EOF { cmds }
 
 commands:
