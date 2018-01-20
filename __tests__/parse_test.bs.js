@@ -9,6 +9,13 @@ var Lexer$Slangwidge  = require("../src/lexer.bs.js");
 var Parser$Slangwidge = require("../src/parser.bs.js");
 
 describe("Parser", (function () {
+        describe("blank script", (function () {
+                var lexbuf = Lexing.from_string("");
+                var commands = Parser$Slangwidge.prog(Lexer$Slangwidge.read, lexbuf);
+                return Jest.test("returns an empty list", (function () {
+                              return Jest.Expect[/* toBe */2](0, Jest.Expect[/* expect */0](List.length(commands)));
+                            }));
+              }));
         describe("basic script", (function () {
                 var lexbuf = Lexing.from_string("\n    walk up\n    shoot right\n    listen 'mock' do\n      shoot left\n    end\n\n    send judy 'my notice'\n  ");
                 var commands = Parser$Slangwidge.prog(Lexer$Slangwidge.read, lexbuf);

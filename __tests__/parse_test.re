@@ -21,7 +21,7 @@ describe("Parser", () => {
     let lexbuf = from_string("");
     let commands = prog(read)(lexbuf);
 
-    it("returns an empty list", () => {
+    test("returns an empty list", () => {
       expect(List.length(commands)) |> toBe(0);
     });
   });
