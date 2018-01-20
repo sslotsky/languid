@@ -45,7 +45,7 @@ function info(lexbuf) {
 function read(s) {
   var lexbuf = Lexing.from_string(s);
   try {
-    return /* Some */Block.__(0, [Parser$Slangwidge.prog(Lexer$Slangwidge.read, lexbuf)]);
+    return /* Commands */Block.__(0, [Parser$Slangwidge.prog(Lexer$Slangwidge.read, lexbuf)]);
   }
   catch (raw_exn){
     var exn = Js_exn.internalToOCamlException(raw_exn);

@@ -16,13 +16,13 @@ let info = lexbuf => {
 };
 
 type program =
-  | Some(list(Ast.command))
+  | Commands(list(Ast.command))
   | Err(string);
 
 let read = s => {
   let lexbuf = from_string(s);
 
-  let result = try (Some(prog(read)(lexbuf))) {
+  let result = try (Commands(prog(read)(lexbuf))) {
     | SyntaxError(msg) => Err(sprintf("Failed with %s at %s", msg, info(lexbuf)))
     | Parser.Error => Err(info(lexbuf))
   };
